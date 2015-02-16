@@ -33,17 +33,17 @@ define(["exports"], function(exports) {
   }
 
   function readConfig(config) {
-    if (config.ehbs) {
-      if (config.ehbs.paths) {
+    if (config.podhbs) {
+      if (config.podhbs.paths) {
         ["views", "templates", "controllers", "helpers"].forEach(function (type) {
-          if (config.ehbs.paths.hasOwnProperty(type)) {
-            paths[type] = config.ehbs.paths[type];
+          if (config.podhbs.paths.hasOwnProperty(type)) {
+            paths[type] = config.podhbs.paths[type];
           }
         });
       }
 
-      if (config.ehbs.casing) {
-        casing = config.ehbs.casing;
+      if (config.podhbs.casing) {
+        casing = config.podhbs.casing;
       }
     }
   }
@@ -100,7 +100,7 @@ define(["exports"], function(exports) {
           if (helperName == "view") {
             path = paths.views;
           } else if (helperName == "partial" || helperName == "render") {
-            path = "ehbs!";
+            path = "podhbs!";
           } else if (helperName == "control") {
             path = paths.controllers;
           } else {
@@ -145,6 +145,10 @@ define(["exports"], function(exports) {
     stringParams: true
   };
 
+  function endsWith(str, suffix) {
+    return str.indexOf(suffix, str.length - suffix.length) !== -1;
+  }
+
   exports.load = function(name, parentRequire, onload, config) {
     var parts = name.split(":");
     var path;
@@ -153,6 +157,18 @@ define(["exports"], function(exports) {
       name = parts[1];
     } else {
       path = name = parts[0];
+      var cutPrefix = 'pods/',
+          cutSuffix = '/template',
+          replMiddle = '/template.';
+
+      if (name.indexOf(cutPrefix) === 0){
+        name = name.substring(cutPrefix.length);
+      }
+      if(endsWith(name, cutSuffix)){
+        name = name.substring(0, name.length - cutSuffix.length);
+      }else if(name.indexOf(replMiddle) !== -1){
+          name = name.replace(replMiddle, '/');
+      }
     }
 
     // Bail out early during build.

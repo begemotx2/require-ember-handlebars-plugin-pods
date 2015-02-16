@@ -1,7 +1,7 @@
 {
-  "name": "require-ember-handlebars-plugin",
+  "name": "require-ember-handlebars-plugin-pods",
   "version": "0.1.2",
-  "main": "ehbs.js",
+  "main": "podhbs.js",
   "ignore": [
     "**/.*",
     "node_modules",

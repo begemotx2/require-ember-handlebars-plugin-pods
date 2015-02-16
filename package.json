@@ -1,8 +1,8 @@
 {
-  "name": "require-ember-handlebars-plugin",
+  "name": "require-ember-handlebars-plugin-pods",
   "version": "0.0.5",
-  "description": "Require.js plugin for automatic, recursive Handlebars loading for Ember",
-  "main": "ehbs.js",
+  "description": "Require.js plugin for automatic, recursive Handlebars loading for Ember (pods mod for migration)",
+  "main": "podhbs.js",
   "directories": {
     "test": "tests"
   },

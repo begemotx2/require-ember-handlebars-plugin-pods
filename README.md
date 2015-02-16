@@ -1,32 +1,23 @@
-# Require.js Ember Handlebars Plugin
+# Require.js Ember Handlebars Plugin.
+Modification for migration to pods stucture.
+
 Automatic requires of template calls to helpers, views, controllers and
 partials.
 
 ## Usage
 Write an Ember Handlebars template like so:
 
-`templates/index.hbs`
+`pods/email/template.hbs`
 ```handlebars
 <section>Welcome to my awesome app!</section>
-<div>{{partial login}}</div>
-```
 
-`templates/login.hbs`
-```handlebars
-<form>
-  {{view Ember.TextField valueBinding="username"}}
-  {{view Ember.TextField valueBinding="password" type="password"}}
-  <button {{action submitForm on="submit"}}>Submit</button>
-</form>
 ```
 
 Then require the template with your route:
 
 ```js
-require(["ehbs!index"], function() {
-  // templates/index.hbs now exists in Ember.TEMPLATES.index
-  // and
-  // templates/login.hbs now exists in Ember.TEMPLATES.login
+require(["podhbs!pods/email"], function() {
+  // pods/email/template.hbs now exists in Ember.TEMPLATES.email  
 });
 ```
 
@@ -34,7 +25,7 @@ require(["ehbs!index"], function() {
 You can configure the paths for the plugin to look up resources, like so:
 ```js
 require.config({
-  ehbs: {
+  podshbs: {
     paths: {
       templates: "foo/bar/templates",
       views: "foo/bar/views",
@@ -48,7 +39,7 @@ require.config({
 You can also configure the type of casing used on your files, like so:
 ```js
 require.config({
-  ehbs: {
+  podshbs: {
     casing: "camel"
   }
 })
